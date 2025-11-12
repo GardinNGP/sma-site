@@ -13,20 +13,16 @@
         
         /* Regras de CSS para o Acordeão (FAQ) */
         .faq-panel {
-            /* Inicialmente esconde o conteúdo e prepara para a transição */
-            max-height: 0;
+            /* max-height: 0 esconde o conteúdo e prepara para a transição */
+            max-height: 0; 
             overflow: hidden;
-            transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+            /* Usamos 'max-height' e 'padding' na transição para um efeito suave */
+            transition: max-height 0.4s ease-in-out; 
         }
 
         .faq-panel > div {
-            padding: 1rem; /* Define o padding interno da resposta */
-        }
-
-        .faq-panel[aria-hidden="true"] > div {
-             /* Remove o padding quando fechado para garantir max-height: 0 funcione */
-            padding-top: 0;
-            padding-bottom: 0;
+            /* Este é o conteúdo real, com o padding que queremos ver ao abrir */
+            padding: 1rem; 
         }
 
         .chevron-icon {
@@ -101,7 +97,7 @@
                     </button>
                     <div id="faq-1" class="faq-panel text-base bg-slate-700/50" role="region" aria-hidden="true">
                         <div> <!-- Envolva o conteúdo para facilitar o padding/reset -->
-                            O aplicativo SMA é otimizado para os sistemas com Android 11 ou superior.
+                            O aplicativo SMA é otimizado para os sistemas com **Android 11 ou superior**. Se o seu dispositivo estiver em uma versão anterior, você poderá enfrentar problemas de compatibilidade ou desempenho.
                         </div>
                     </div>
                 </div>
@@ -117,7 +113,7 @@
                     </button>
                     <div id="faq-2" class="faq-panel text-base bg-slate-700/50" role="region" aria-hidden="true">
                         <div>
-                            Utilizamos uma tecnologia de reconhecimento que identifica o card da corrida, aplicando automaticamente calculos de ganhos pré-configurados (como custo por km e por Hr) para fornecer valores estimados em poucos segundos.
+                            Utilizamos uma tecnologia de reconhecimento que identifica o card da corrida, aplicando automaticamente calculos de ganhos pré-configurados (como custo por km e por Hr) para fornecer valores estimados em poucos segundos. O app compara esses dados com suas despesas fixas para dar uma visão clara do seu **lucro real**.
                         </div>
                     </div>
                 </div>
@@ -133,7 +129,7 @@
                     </button>
                     <div id="faq-3" class="faq-panel text-base bg-slate-700/50" role="region" aria-hidden="true">
                         <div>
-                            Oferecemos uma versão básica gratuita com o monitoramento de ganhos. Para acessar todos os recursos é necessário uma assinatura Premium.
+                            Oferecemos uma **versão básica gratuita** com o monitoramento de ganhos essencial. Para acessar todos os recursos avançados, como relatórios detalhados, metas de economia e ajustes personalizados de custos, é necessária uma assinatura **Premium**.
                         </div>
                     </div>
                 </div>
@@ -150,16 +146,19 @@
                     <div id="faq-4" class="faq-panel text-base bg-slate-700/50" role="region" aria-hidden="true">
                         <div>
                             <p>
-                                Possivelmente é um problema no <strong>Play Protect</strong>, para corrigir você deve:
+                                Possivelmente é um problema no **Play Protect**, para corrigir você deve:
                             </p>
                             <ol class="list-decimal list-inside ml-4 mt-2 space-y-1 text-base text-gray-200">
                                 <li>Abra a Google Play Store no seu dispositivo Android.</li>
                                 <li>Toque no seu ícone de perfil (geralmente no canto superior direito).</li>
-                                <li>Selecione <strong>Play Protect</strong>.</li>
-                                <li>Toque no ícone de <strong>Configurações</strong> (engrenagem) no canto superior direito.</li>
-                                <li>Desative a opção <strong>Verificar apps com o Play Protect</strong>.</li>
+                                <li>Selecione **Play Protect**.</li>
+                                <li>Toque no ícone de **Configurações** (engrenagem) no canto superior direito.</li>
+                                <li>Desative a opção **Verificar apps com o Play Protect**.</li>
                                 <li>Tente instalar o APK novamente. Lembre-se de reativar o Play Protect após a instalação para manter a segurança do seu dispositivo!</li>
                             </ol>
+                            <p class="mt-4 text-sm italic text-gray-400">
+                                Este é um procedimento padrão para instalar aplicativos fora da Google Play Store. O SMA App é seguro, mas o Play Protect é cauteloso com APKs de terceiros.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -242,9 +241,8 @@
 
                         if (t !== toggle) {
                             t.setAttribute('aria-expanded', 'false');
-                            // Garante que o painel e o ícone chevron sejam fechados
-                            otherPanel.style.maxHeight = null; // **CORREÇÃO: Define maxHeight para null para fechar (volta para CSS max-height: 0)**
-                            otherPanel.classList.remove('active');
+                            // Fecha o painel, voltando ao max-height: 0 do CSS
+                            otherPanel.style.maxHeight = null; 
                             otherPanel.setAttribute('aria-hidden', 'true');
                             otherChevron.classList.remove('active');
                         }
@@ -254,16 +252,15 @@
                     if (isExpanded) {
                         // Se estiver expandido, fecha
                         toggle.setAttribute('aria-expanded', 'false');
-                        panel.style.maxHeight = null; // **CORREÇÃO: Fecha o painel**
-                        panel.classList.remove('active');
+                        // Define maxHeight como null para acionar a transição de volta a max-height: 0
+                        panel.style.maxHeight = null; 
                         panel.setAttribute('aria-hidden', 'true');
                         chevron.classList.remove('active');
                     } else {
                         // Se estiver fechado, abre
                         toggle.setAttribute('aria-expanded', 'true');
-                        // **CORREÇÃO: Define maxHeight como scrollHeight para abrir com transição suave**
+                        // Define maxHeight como o scrollHeight (altura total do conteúdo + padding)
                         panel.style.maxHeight = panel.scrollHeight + "px"; 
-                        panel.classList.add('active');
                         panel.setAttribute('aria-hidden', 'false');
                         chevron.classList.add('active');
                     }
@@ -292,11 +289,6 @@
                 await new Promise(resolve => setTimeout(resolve, 2000));
                 
                 try {
-                    // ** NOTA IMPORTANTE: **
-                    // Esta é uma simulação de sucesso. Em um ambiente real, você faria uma 
-                    // requisição fetch() para um servidor de backend que processaria e enviaria o e-mail.
-                    // Já que não temos backend, simulamos o sucesso.
-
                     // Simulação de Sucesso
                     statusMessage.textContent = 'Mensagem enviada com sucesso! Responderemos em breve.';
                     statusMessage.classList.add('text-green-400');
