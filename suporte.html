@@ -232,15 +232,18 @@
                     const panel = toggle.nextElementSibling;
                     const chevron = toggle.querySelector('.chevron-icon');
                     
-                    const isExpanded = toggle.getAttribute('aria-expanded') === 'true' || false;
+                    // Verifica o estado atual de expansão
+                    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
 
-                    // Fecha todos os painéis, a não ser que o painel clicado seja o que está aberto
+                    // Itera sobre todos os toggles para fechar os outros painéis (comportamento "monocle")
                     faqToggles.forEach(t => {
                         const otherPanel = t.nextElementSibling;
                         const otherChevron = t.querySelector('.chevron-icon');
 
                         if (t !== toggle) {
                             t.setAttribute('aria-expanded', 'false');
+                            // Garante que o painel e o ícone chevron sejam fechados
+                            otherPanel.style.maxHeight = null; // **CORREÇÃO: Define maxHeight para null para fechar (volta para CSS max-height: 0)**
                             otherPanel.classList.remove('active');
                             otherPanel.setAttribute('aria-hidden', 'true');
                             otherChevron.classList.remove('active');
@@ -249,12 +252,17 @@
 
                     // Abre ou fecha o painel clicado
                     if (isExpanded) {
+                        // Se estiver expandido, fecha
                         toggle.setAttribute('aria-expanded', 'false');
+                        panel.style.maxHeight = null; // **CORREÇÃO: Fecha o painel**
                         panel.classList.remove('active');
                         panel.setAttribute('aria-hidden', 'true');
                         chevron.classList.remove('active');
                     } else {
+                        // Se estiver fechado, abre
                         toggle.setAttribute('aria-expanded', 'true');
+                        // **CORREÇÃO: Define maxHeight como scrollHeight para abrir com transição suave**
+                        panel.style.maxHeight = panel.scrollHeight + "px"; 
                         panel.classList.add('active');
                         panel.setAttribute('aria-hidden', 'false');
                         chevron.classList.add('active');
@@ -262,7 +270,7 @@
                 });
             });
 
-            // --- Lógica do Formulário de Contato ---
+            // --- Lógica do Formulário de Contato (Mantida) ---
             const form = document.getElementById('contactForm');
             const statusMessage = document.getElementById('statusMessage');
             const submitButton = document.getElementById('submitButton');
