@@ -10,6 +10,32 @@
             font-family: 'Inter', sans-serif;
             background-color: #1e293b; /* slate-800 */
         }
+        
+        /* Regras de CSS para o Acordeão (FAQ) */
+        .faq-panel {
+            /* Inicialmente esconde o conteúdo e prepara para a transição */
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+        }
+
+        .faq-panel > div {
+            padding: 1rem; /* Define o padding interno da resposta */
+        }
+
+        .faq-panel[aria-hidden="true"] > div {
+             /* Remove o padding quando fechado para garantir max-height: 0 funcione */
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .chevron-icon {
+            transform: rotate(0deg);
+            transition: transform 0.3s ease-in-out;
+        }
+        .chevron-icon.active {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 <body>
@@ -74,7 +100,7 @@
                         <svg class="chevron-icon w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div id="faq-1" class="faq-panel text-base bg-slate-700/50" role="region" aria-hidden="true">
-                        <div class="p-4 pt-0">
+                        <div> <!-- Envolva o conteúdo para facilitar o padding/reset -->
                             O aplicativo SMA é otimizado para os sistemas com Android 11 ou superior.
                         </div>
                     </div>
@@ -90,7 +116,7 @@
                         <svg class="chevron-icon w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div id="faq-2" class="faq-panel text-base bg-slate-700/50" role="region" aria-hidden="true">
-                        <div class="p-4 pt-0">
+                        <div>
                             Utilizamos uma tecnologia de reconhecimento que identifica o card da corrida, aplicando automaticamente calculos de ganhos pré-configurados (como custo por km e por Hr) para fornecer valores estimados em poucos segundos.
                         </div>
                     </div>
@@ -106,7 +132,7 @@
                         <svg class="chevron-icon w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div id="faq-3" class="faq-panel text-base bg-slate-700/50" role="region" aria-hidden="true">
-                        <div class="p-4 pt-0">
+                        <div>
                             Oferecemos uma versão básica gratuita com o monitoramento de ganhos. Para acessar todos os recursos é necessário uma assinatura Premium.
                         </div>
                     </div>
@@ -122,7 +148,7 @@
                         <svg class="chevron-icon w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div id="faq-4" class="faq-panel text-base bg-slate-700/50" role="region" aria-hidden="true">
-                        <div class="p-4 pt-0">
+                        <div>
                             <p>
                                 Possivelmente é um problema no <strong>Play Protect</strong>, para corrigir você deve:
                             </p>
@@ -182,7 +208,7 @@
             
             <p class="text-sm text-gray-500 mt-6 text-center">
                 Para questões urgentes, você pode nos contatar diretamente em 
-                <a href="mailto:contato@smaapp.com.br" class="text-cyan-500 hover:underline font-semibold">contato@smaapp.com.br</a>.
+                <a href="mailto:contato@smaapp.com.br" class="text-cyan-500 hover:underline font-semibold">contato.smaapp@gmail.com</a>.
             </p>
         </section>
 
