@@ -99,8 +99,23 @@
             </div>
         </section>
 		
-		<!-- SEÇÃO DE RECURSOS PRINCIPAIS -->
-        <section class="mt-20 py-12">
+		<!-- SEPARADOR COM ONDAS ELEGANTES (NOVO) -->
+        <div class="py-12 flex justify-center w-full">
+            <div class="w-full max-w-5xl">
+                <!-- SVG com 3 ondas de cores ciano/azul para um visual elegante e discreto -->
+                <svg viewBox="0 0 1000 30" class="w-full h-10" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Onda 1 (Ciano Escuro) -->
+                    <path d="M0 10 C 250 5, 500 15, 750 10 S 1000 5, 1000 10" stroke="#0e7490" stroke-width="2" fill="none" class="opacity-70"></path>
+                    <!-- Onda 2 (Ciano Médio) -->
+                    <path d="M0 15 C 250 10, 500 20, 750 15 S 1000 10, 1000 15" stroke="#06b6d4" stroke-width="2" fill="none"></path>
+                    <!-- Onda 3 (Ciano Claro) -->
+                    <path d="M0 20 C 250 15, 500 25, 750 20 S 1000 15, 1000 20" stroke="#22d3ee" stroke-width="2" fill="none" class="opacity-70"></path>
+                </svg>
+            </div>
+        </div>
+		
+        <!-- SEÇÃO DE RECURSOS PRINCIPAIS (AGORA SEM MARGEM TOP) -->
+        <section class="py-12">
             <div class="md:flex flex-row-reverse items-center justify-between gap-16">
                 
                 <!-- LADO DIREITO: TÍTULO E RECURSOS -->
@@ -144,13 +159,12 @@
                     </div>
                 </div>
 
-                <!-- LADO ESQUERDO: IMAGEM DO TELEFONE -->
-                <!-- No desktop a ordem é invertida (flex-row-reverse) para o texto ficar à direita e a imagem à esquerda, conforme solicitado. -->
-                <div class="md:w-1/2 flex justify-center mb-1 md:mb-0">
-                    <!-- Imagem do telefone/screenshot do app -->
+                <!-- LADO ESQUERDO: IMAGEM DO TELEFONE (TAMANHO REDUZIDO) -->
+                <div class="md:w-1/2 flex justify-center mb-12 md:mb-0">
+                    <!-- A classe 'max-w-md' foi reduzida para 'max-w-[350px]' (cerca de 1/3 menor que 448px original) -->
                     <img src="./capa_telefone.png" 
                          alt="Captura de tela do SMA App em um telefone" 
-                         class="w-full max-w-xs md:max-w-md h-auto rounded-[2.5rem] shadow-2xl ring-4 ring-cyan-500/50 transform hover:scale-[1.01] transition duration-500"
+                         class="w-full max-w-[280px] md:max-w-[350px] h-auto rounded-[2.5rem] shadow-2xl ring-4 ring-cyan-500/50 transform hover:scale-[1.01] transition duration-500"
                          onerror="this.onerror=null;this.src='https://placehold.co/400x650/06B6D4/ffffff?text=Capa+App';">
                 </div>
 
